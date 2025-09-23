@@ -113,36 +113,64 @@ formEditarCliente.addEventListener("submit", (e) => {
 
 
 const formExcluirCliente = document.getElementById('formExcluirCliente');
-const confirmExcluirModal = new bootstrap.Modal(document.getElementById('confirmExcluirModal'));
+const confirmExcluirModalEl = document.getElementById('confirmExcluirModal');
+const confirmExcluirModal = new bootstrap.Modal(confirmExcluirModalEl);
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+const modalBody = confirmExcluirModalEl.querySelector('.modal-body');
+
+let nomeClienteParaExcluir = ''; // guarda o nome do cliente
 
 formExcluirCliente.addEventListener('submit', function(e) {
   e.preventDefault(); // evita envio direto
-  confirmExcluirModal.show(); // abre modal
+
+  const clienteID = document.getElementById('clienteID').value.trim();
+  if (!clienteID) return alert('Informe o ID do cliente!');
+
+  // Buscar nome do cliente antes de mostrar modal
+  fetch(`http://localhost:3000/api/clientes/${clienteID}`)
+    .then(res => {
+      if (!res.ok) throw new Error('Cliente não encontrado');
+      return res.json();
+    })
+    .then(cliente => {
+      nomeClienteParaExcluir = cliente.nome; // guarda nome
+      modalBody.textContent = `Tem certeza que deseja excluir ${nomeClienteParaExcluir}? Esta ação não pode ser desfeita.`;
+      confirmExcluirModal.show(); // abre modal
+    })
+    .catch(err => {
+      alert(err.message);
+    });
 });
 
 confirmDeleteBtn.addEventListener('click', function() {
   const clienteID = document.getElementById('clienteID').value;
 
-  // Chama backend para deletar cliente
+  // Desativa o botão e mostra loading
+  confirmDeleteBtn.disabled = true;
+  confirmDeleteBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Excluindo...`;
+
   fetch(`http://localhost:3000/api/clientes/${clienteID}`, {
     method: "DELETE"
   })
   .then(res => res.json())
   .then(data => {
-    alert(data.message); // mostra mensagem do backend
+    alert(data.message);
 
     // Atualiza as tabelas
-    carregarClientes();  // GET /api/clientes
-    carregarContatos();  // GET /api/contatos
+    carregarClientes();
+    carregarContatos();
 
-    // Fecha modal e reseta formulário
     confirmExcluirModal.hide();
     formExcluirCliente.reset();
   })
   .catch(err => {
     console.error("Erro ao excluir cliente:", err);
     alert("Ocorreu um erro ao excluir o cliente.");
+  })
+  .finally(() => {
+    // Restaura o botão
+    confirmDeleteBtn.disabled = false;
+    confirmDeleteBtn.innerHTML = "Excluir";
   });
 });
 

@@ -126,7 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const idContato = document.getElementById("contatoID").value;
 
-    // Verifica se ID foi preenchido
     if (!idContato) {
       alert("Informe o ID do contato!");
       return;
@@ -136,8 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmExcluirContatoModal.show();
   });
 
-  confirmDeleteContatoBtn.addEventListener("click", () => {
+    confirmDeleteContatoBtn.addEventListener("click", () => {
     const idContato = document.getElementById("contatoID").value;
+
+    // Desabilita o botão e adiciona spinner
+    confirmDeleteContatoBtn.disabled = true;
+    const btnOriginalText = confirmDeleteContatoBtn.innerHTML;
+    confirmDeleteContatoBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Excluindo...`;
 
     fetch(`http://localhost:3000/api/contatos/${idContato}`, {
       method: "DELETE"
@@ -154,10 +158,14 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => {
       console.error("Erro ao excluir contato:", err);
       alert("❌ Ocorreu um erro ao excluir o contato");
+    })
+    .finally(() => {
+      // Restaura o botão e fecha modal
+      confirmDeleteContatoBtn.disabled = false;
+      confirmDeleteContatoBtn.innerHTML = btnOriginalText;
+      confirmExcluirContatoModal.hide();
+      formExcluirContato.reset();
     });
-
-    // Fecha modal e reseta formulário
-    confirmExcluirContatoModal.hide();
-    formExcluirContato.reset();
   });
 });
+

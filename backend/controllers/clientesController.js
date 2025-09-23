@@ -76,7 +76,7 @@ exports.deleteCliente = (req, res) => {
         return res.status(500).json({ error: "Erro ao excluir cliente" });
       }
 
-      res.json({ message: "Cliente e contatos excluídos com sucesso" });
+      res.json({ message: "✅ Cliente e contatos excluídos com sucesso" });
     });
   });
 };
