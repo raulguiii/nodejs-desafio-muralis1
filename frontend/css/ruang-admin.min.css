@@ -1965,3 +1965,12 @@ body.sidebar-toggled footer.sticky-footer {
 .hover-shadow:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
+
+
+#inputBuscaClientes, #inputBuscaContatos {
+  padding-left: 2rem; /* espaço para a lupa */
+  background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png'); /* ícone de lupa */
+  background-size: 1rem;
+  background-repeat: no-repeat;
+  background-position: 0.5rem center;
+}

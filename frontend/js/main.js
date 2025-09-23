@@ -15,31 +15,4 @@ document.querySelectorAll('.nav-link[data-section]').forEach(link => {
 
 
 
-// Função genérica de busca
-  function filtrarTabela(inputId, tabelaId) {
-    const filtro = document.getElementById(inputId).value.toLowerCase();
-    const linhas = document.querySelectorAll(`#${tabelaId} tr`);
-    linhas.forEach(linha => {
-      const nome = linha.cells[1].textContent.toLowerCase(); // coluna Nome do Cliente
-      linha.style.display = nome.includes(filtro) ? '' : 'none';
-    });
-  }
-
-  // Clientes
-  document.getElementById('btnBuscaClientes').addEventListener('click', () => {
-    const area = document.getElementById('areaBuscaClientes');
-    area.style.display = area.style.display === 'none' ? 'block' : 'none';
-  });
-  document.getElementById('inputBuscaClientes').addEventListener('keyup', () => {
-    filtrarTabela('inputBuscaClientes', 'tabelaClientes');
-  });
-
-  // Contatos
-  document.getElementById('btnBuscaContatos').addEventListener('click', () => {
-    const area = document.getElementById('areaBuscaContatos');
-    area.style.display = area.style.display === 'none' ? 'block' : 'none';
-  });
-  document.getElementById('inputBuscaContatos').addEventListener('keyup', () => {
-    filtrarTabela('inputBuscaContatos', 'tabelaContatos');
-  });
 

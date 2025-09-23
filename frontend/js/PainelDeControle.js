@@ -75,3 +75,26 @@ window.addEventListener("DOMContentLoaded", () => {
   carregarClientes();
   carregarContatos();
 });
+
+
+// Função genérica de busca
+function filtrarTabela(inputId, tabelaId) {
+  const filtro = document.getElementById(inputId).value.toLowerCase();
+  const linhas = document.querySelectorAll(`#${tabelaId} tr`);
+  linhas.forEach(linha => {
+    const nome = linha.cells[1]?.textContent.toLowerCase() || '';
+    linha.style.display = nome.includes(filtro) ? '' : 'none';
+  });
+}
+// Clientes
+document.getElementById('inputBuscaClientes').addEventListener('keyup', () => {
+  filtrarTabela('inputBuscaClientes', 'tabelaClientes');
+});
+
+// Contatos
+document.getElementById('inputBuscaContatos').addEventListener('keyup', () => {
+  filtrarTabela('inputBuscaContatos', 'tabelaContatos');
+});
+
+
+
