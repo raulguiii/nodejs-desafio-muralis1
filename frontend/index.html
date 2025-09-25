@@ -213,9 +213,8 @@
               <div>
                 <h1 class="h4 mb-2 fw-bold">Área Premium - Visão Geral das Tabelas</h1>
                 <p class="mb-0">
-                  🔹 <strong>Tabela 1</strong>: Resumo rápido com <b>Nome do Cliente</b>, <b>CPF</b> e <b>Contato</b>.<br>
-                  🔹 <strong>Tabela 2</strong>: Lista completa de <b>Clientes</b> com ID, nascimento e endereço.<br>
-                  🔹 <strong>Tabela 3</strong>: Detalhes dos <b>Contatos</b>, incluindo tipo e observações.<br>
+                  🔹 <strong>Tabela 1</strong>: Lista completa de <b>Clientes</b> com ID, nascimento e endereço.<br>
+                  🔹 <strong>Tabela 2</strong>: Detalhes dos <b>Contatos</b>, incluindo tipo e observações.<br>
                   ✅ Use essas tabelas para localizar informações com agilidade e visualizar contatos diretamente.
                 </p>
               </div>
@@ -224,33 +223,8 @@
 
           
 
-          <!-- 🔵 Tabela 1 – Nome / CPF / Contato -->
-          <div class="mt-4 mb-4 p-3 bg-white shadow-sm rounded border-start border-4 border-primary">
-            <h2 class="h5 text-gray-800 font-weight-bold mb-3">
-              <i class="fas fa-address-book text-primary me-2"></i>Resumo Rápido
-            </h2>
-            <div class="table-responsive">
-              <table class="table table-bordered table-hover">
-                <thead class="thead-light">
-                  <tr>
-                    <th>Nome do Cliente</th>
-                    <th>CPF</th>
-                    <th>Contato</th>
-                  </tr>
-                </thead>
-                <tbody id="tabelaResumo">
-                  <!-- Exemplo -->
-                  <tr>
-                    <td>João Silva</td>
-                    <td>123.456.789-00</td>
-                    <td>(11) 99999-9999</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
 
-          <!-- 🔵 Tabelas 2 e 3 lado a lado -->
+          <!-- 🔵 Tabelas 1 e 2 lado a lado -->
           <div class="row">
             <!-- Clientes -->
             <div class="col-lg-6 mb-4">
@@ -277,10 +251,12 @@
                       <tbody id="tabelaClientes">
 
                       </tbody>
-                  </table>
-                </div>
+                  </table>      
+                </div>            
               </div>
-            </div>
+              <!-- Clientes -->
+            <div id="paginacaoClientes" class="mt-2"></div>
+          </div>
 
             <!-- Contatos -->
             <div class="col-lg-6 mb-4">
@@ -309,6 +285,8 @@
                   </table>
                 </div>
               </div>
+              <!-- Contatos -->
+              <div id="paginacaoContatos" class="mt-2"></div>
             </div>
           </div>
         </section>

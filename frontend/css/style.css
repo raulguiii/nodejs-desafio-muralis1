@@ -1974,3 +1974,9 @@ body.sidebar-toggled footer.sticky-footer {
   background-repeat: no-repeat;
   background-position: 0.5rem center;
 }
+
+.paginacaoContatos {
+  display: flex;
+  justify-content: center; /* Centraliza no eixo horizontal */
+  margin-top: 10px; /* Espaço entre tabela e paginação */
+}
