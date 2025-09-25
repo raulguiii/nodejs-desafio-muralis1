@@ -33,7 +33,7 @@ npm install
 ### 4️⃣ Configurar o banco de dados
 - Crie um banco de dados MySQL local (por exemplo, `desafio_muralis`).  
 - No arquivo `db.js`, **configure as credenciais corretas** (host, usuário, senha e nome do banco) para que a aplicação consiga se conectar ao MySQL.  
-- O projeto já contém um arquivo `init_db.sql` que possui **toda a estrutura do banco de dados**.
+- O projeto já contém um arquivo `init_db.sql` que possui **toda a estrutura do banco de dados**, basta copia-lo e colar no seu banco.
 
 ⚠️ **Observação importante:** Sempre revise as credenciais do banco antes de rodar o servidor para evitar erros de conexão.
 
