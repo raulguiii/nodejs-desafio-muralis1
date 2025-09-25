@@ -1,5 +1,6 @@
 const db = require("../db");
 
+// GET clientes
 exports.getClientes = (req, res) => {
   db.query("SELECT * FROM clientes", (err, results) => {
     if (err) {
@@ -9,6 +10,7 @@ exports.getClientes = (req, res) => {
   });
 };
 
+// Criar novo cliente
 exports.createCliente = (req, res) => {
   const { nome, cpf, data_nascimento, endereco } = req.body;
 
@@ -19,11 +21,13 @@ exports.createCliente = (req, res) => {
   const sql = "INSERT INTO clientes (nome, cpf, data_nascimento, endereco) VALUES (?, ?, ?, ?)";
   db.query(sql, [nome, cpf, data_nascimento, endereco], (err, result) => {
     if (err) {
+      if (err.code === "ER_DUP_ENTRY") {
+        return res.status(400).json({ error: "⚠️ Já existe um cliente com este CPF" });
+      }
       console.error(err);
       return res.status(500).json({ error: "Erro ao cadastrar cliente" });
     }
 
-    // Retorna o cliente cadastrado com o id gerado
     res.status(201).json({ id: result.insertId, nome, cpf, data_nascimento, endereco });
   });
 };
@@ -49,10 +53,22 @@ exports.updateCliente = (req, res) => {
     return res.status(400).json({ error: "Todos os campos são obrigatórios" });
   }
 
-  const sql = "UPDATE clientes SET nome = ?, cpf = ?, data_nascimento = ?, endereco = ? WHERE id = ?";
-  db.query(sql, [nome, cpf, data_nascimento, endereco, id], (err, result) => {
-    if (err) return res.status(500).json({ error: "Erro ao atualizar cliente" });
-    res.json({ message: "Cliente atualizado com sucesso" });
+  // Verifica se o CPF já existe em outro cliente
+  const checkCpfSql = "SELECT id FROM clientes WHERE cpf = ? AND id != ?";
+  db.query(checkCpfSql, [cpf, id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Erro ao verificar CPF" });
+
+    if (results.length > 0) {
+      return res.status(400).json({ error: "⚠️ Já existe outro cliente com este CPF" });
+    }
+
+    // Se não existir, atualiza
+    const sql = "UPDATE clientes SET nome = ?, cpf = ?, data_nascimento = ?, endereco = ? WHERE id = ?";
+    db.query(sql, [nome, cpf, data_nascimento, endereco, id], (err2, result) => {
+      if (err2) return res.status(500).json({ error: "Erro ao atualizar cliente" });
+
+      res.json({ message: "✅ Cliente atualizado com sucesso" });
+    });
   });
 };
 

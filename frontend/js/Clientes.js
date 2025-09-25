@@ -27,22 +27,16 @@ formNovoCliente.addEventListener("submit", function(e) {
     body: JSON.stringify(cliente)
   })
   .then(res => {
-    if (!res.ok) throw new Error("Erro ao cadastrar cliente");
+    if (!res.ok) return res.json().then(err => { throw new Error(err.error); });
     return res.json();
   })
   .then(data => {
-    // Exibe mensagem de sucesso
     alert("Cliente cadastrado com sucesso!");
-
-    // Limpa o formulário
     formNovoCliente.reset();
-
-    // Atualiza a tabela de clientes sem recarregar a página
     carregarClientes();
   })
   .catch(err => {
-    console.error(err);
-    alert("Ocorreu um erro ao cadastrar o cliente.");
+    alert(err.message);
   });
 });
 
@@ -96,7 +90,7 @@ formEditarCliente.addEventListener("submit", (e) => {
     body: JSON.stringify(clienteAtualizado)
   })
     .then(res => {
-      if (!res.ok) throw new Error("Erro ao atualizar cliente");
+      if (!res.ok) return res.json().then(err => { throw new Error(err.error); });
       return res.json();
     })
     .then(data => {
@@ -106,8 +100,7 @@ formEditarCliente.addEventListener("submit", (e) => {
       carregarClientes(); // Atualiza a tabela
     })
     .catch(err => {
-      console.error(err);
-      alert(err.message);
+      alert(err.message); // Exibe "Já existe outro cliente com este CPF"
     });
 });
 
