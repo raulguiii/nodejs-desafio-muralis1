@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.error) {
         alert("❌ " + data.error);
       } else {
-        alert("✅ Contato excluído com sucesso!");
+        alert(data.message);
         carregarContatos(); 
       }
     })

@@ -68,7 +68,6 @@ exports.deleteCliente = (req, res) => {
     if (err) return res.status(500).json({ error: "Erro ao verificar cliente" });
     if (!results.length) return res.status(404).json({ error: "Cliente não encontrado" });
 
-    // Exclui o cliente (os contatos serão removidos automaticamente por ON DELETE CASCADE)
     const deleteClienteSql = "DELETE FROM clientes WHERE id = ?";
     db.query(deleteClienteSql, [id], (err2, result) => {
       if (err2) {

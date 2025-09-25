@@ -81,6 +81,6 @@ exports.deleteContato = (req, res) => {
       return res.status(500).json({ error: "Erro ao excluir contato" });
     }
     if (result.affectedRows === 0) return res.status(404).json({ error: "Contato não encontrado" });
-    res.json({ message: "Contato excluído com sucesso" });
+    res.json({ message: "✅ Contato excluído com sucesso" });
   });
 };
