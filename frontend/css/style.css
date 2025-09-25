@@ -1975,8 +1975,8 @@ body.sidebar-toggled footer.sticky-footer {
   background-position: 0.5rem center;
 }
 
-.paginacaoContatos {
+.pagination-container {
   display: flex;
-  justify-content: center; /* Centraliza no eixo horizontal */
-  margin-top: 10px; /* Espaço entre tabela e paginação */
+  justify-content: center; /* centraliza */
+  margin-top: 10px; /* um espacinho da tabela */
 }
