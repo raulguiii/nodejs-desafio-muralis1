@@ -65,6 +65,7 @@ O sistema estará disponível em:
 ✅ **Extras**
 - Busca rápida nas tabelas
 - Interface simples e intuitiva
+- Na SideBar ao clicar em DESAFIO MURALIS a página é recarregada
 
 ---
 
