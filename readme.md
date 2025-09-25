@@ -31,7 +31,7 @@ npm install
 ```
 
 ### 4️⃣ Configurar o banco de dados
-- Crie um banco de dados MySQL local (por exemplo, `clientes_db`).  
+- Crie um banco de dados MySQL local (por exemplo, `desafio_muralis`).  
 - No arquivo `db.js`, **configure as credenciais corretas** (host, usuário, senha e nome do banco) para que a aplicação consiga se conectar ao MySQL.  
 - O projeto já contém um arquivo `init_db.sql` que possui **toda a estrutura do banco de dados**.
 
@@ -40,10 +40,6 @@ npm install
 
 
 ### 5️⃣ Rodar o servidor
-```bash
-npm start
-```
-ou
 ```bash
 node backend/server.js
 ```
@@ -62,7 +58,9 @@ O sistema estará disponível em:
 
 ✅ **Contatos**
 - Listar contatos vinculados a cada cliente
+- Buscar contatos por nome
 - Cadastrar, editar e excluir contatos
+- Paginação (5 registros por página)
 
 ✅ **Extras**
 - Busca rápida nas tabelas
@@ -89,6 +87,10 @@ O sistema estará disponível em:
    - Para editar ou excluir, informe o **ID do contato**.
 
 ---
+
+## 💡 Observações
+Este projeto foi desenvolvido em **Node.js** em vez de **Java**, pois o autor **não possui familiaridade com Java**.  
+A escolha do Node.js permitiu maior agilidade no desenvolvimento e melhor aproveitamento do conhecimento prévio em JavaScript.
 
 ## 👨‍💻 Autor
 **Raul Guilherme**  
